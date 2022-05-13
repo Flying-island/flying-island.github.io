@@ -34,14 +34,16 @@ app.stage.addChild(container);
 // Create a new texture
 const texture = PIXI.Texture.from('assets/smallflower.png');
 
+let spacingVar = 80;
+let imgSizeVar = 120; // for square images
 // Create a 5x5 grid of bunnies
 for (let i = 0; i < 25; i++) {
     const flower = new PIXI.Sprite(texture);
     flower.anchor.set(0);
-    flower.x = (i % 5) * 40;
-    flower.y = Math.floor(i / 5) * 40;
-    flower.width = 50;
-    flower.height = 50;
+    flower.x = (i % 5) * spacingVar;
+    flower.y = Math.floor(i / 5) * spacingVar;
+    flower.width = imgSizeVar;
+    flower.height = imgSizeVar;
     container.addChild(flower);
 }
 
@@ -61,7 +63,57 @@ app.ticker.add((delta) => {
 });
 
 // ==============================
-// This part is for
+// This part is for adding the text message
+
+// always-forever.zip
+
+// // Load them google fonts before starting...!
+window.WebFontConfig = {
+    google: {
+        families: ['Snippet', 'Arvo:700italic', 'Podkova:700'],
+    },
+
+    active() {
+        init();
+    },
+};
+
+/* eslint-disable */
+// include the web-font loader script
+(function() {
+    const wf = document.createElement('script');
+    wf.src = `${document.location.protocol === 'https:' ? 'https' : 'http'
+    }://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js`;
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    const s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+}());
+/* eslint-enabled */
+
+const style = new PIXI.TextStyle({
+    fontFamily: 'Snippet',
+    fontSize: 28,
+    fontStyle: 'italic',
+    // fontWeight: 'bold',
+    fill: ['#f0f0f0', '#00ff99'], // gradient
+    stroke: '#4a1850',
+    strokeThickness: 5,
+    // dropShadow: true,
+    // dropShadowColor: '#000000',
+    // dropShadowBlur: 15,
+    // dropShadowAngle: Math.PI / 6,
+    // dropShadowDistance: 9,
+    wordWrap: true,
+    wordWrapWidth: 440,
+    lineJoin: 'round',
+});
+
+const richText = new PIXI.Text('Happy Mother\'s day, mom! \nС Днём Матери, мамуля! <3', style);
+richText.x = 50;
+richText.y = 50;
+
+app.stage.addChild(richText);
 
     </script>
 </body>
